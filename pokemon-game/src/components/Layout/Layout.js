@@ -1,8 +1,6 @@
 import style from "./style.module.css";
 const Layout = ({ title, descr, urlBg, colorBg }) => {
- /*  const bg = urlBg ? `url(${urlBg})` : `${colorBg}`; */
-  
-  const layoutStyle = {
+   const layoutStyle = {
     backgroundImage: urlBg?`url(${urlBg})`: `none`,
     backgroundColor: colorBg?`${colorBg}`: `none`,
   };
