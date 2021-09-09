@@ -22,6 +22,7 @@ function App() {
         title="This is the third title"
         descr="This is the Description!"
         urlBg={bg}
+        colorBg="green"
       />
       <Footer />
     </div>
