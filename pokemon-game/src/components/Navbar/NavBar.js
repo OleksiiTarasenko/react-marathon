@@ -11,9 +11,10 @@ const NavBar = ({ state, onChangeMenu }) => {
     <nav className={style.root}>
       <div className={style.navWrapper}>
         <p className={style.brand}>LOGO</p>
-        <a
-          className={cn(style.menuButton, { [style.active]: state })}
-          onClick={handlerClick}
+        <a 
+                    href="#foo"
+                    onClick={handlerClick}
+                    className={cn(style.menuButton, { [style.active]: state })}
         >
           <span />
         </a>
