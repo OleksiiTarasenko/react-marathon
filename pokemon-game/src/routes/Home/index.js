@@ -9,7 +9,7 @@ import bg from "../../assets/bg1.jpg";
 import "../../index.css";
 import "../../App.css";
 
-/* import style from "./style.module.css"; */
+
 
 function HomePage({ onChangePage }) {
   const handlerClickButton = (page) => {
