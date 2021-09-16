@@ -2,22 +2,20 @@ import cn from "classnames";
 
 import style from "./style.module.css";
 
-const NavBar = ({ state, onChangeMenu }) => {
-  const handlerClick = () => {
-    onChangeMenu && onChangeMenu();
-  };
+const NavBar = ({ isOpen, bgActive = false, onChangeMenu }) => {
+ 
 
   return (
-    <nav className={style.root}>
+    <nav className={cn(style.root, {[style.bgActive]:bgActive})}>
       <div className={style.navWrapper}>
         <p className={style.brand}>LOGO</p>
-        <a 
-                    href="#foo"
-                    onClick={handlerClick}
-                    className={cn(style.menuButton, { [style.active]: state })}
+        <div
+                   
+                    onClick={onChangeMenu}
+                    className={cn(style.menuButton, { [style.active]:isOpen})}
         >
           <span />
-        </a>
+        </div>
       </div>
     </nav>
   );

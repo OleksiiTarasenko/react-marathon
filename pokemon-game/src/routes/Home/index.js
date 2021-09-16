@@ -1,8 +1,8 @@
 import Header from "../../components/Header/Header";
 import Layout from "../../components/Layout/Layout";
-import Footer from "../../components/Footer/Footer";
+
 import PokemonCard from "../../components/PokemonCard/PokemonCard";
-import MenuHeader from "../../components/MenuHeader/MenuHeader";
+
 import { POKEMONS } from "../../assets/pokemonSquad";
 import bg from "../../assets/bg1.jpg";
 
@@ -17,7 +17,7 @@ function HomePage({ onChangePage }) {
   };
   return (
     <div className="App">
-      <MenuHeader />
+   
       <Header
         title="Pokemon Game"
         descr="This is simple triple triad card game"
@@ -65,7 +65,7 @@ function HomePage({ onChangePage }) {
       <Layout title="This is the third title" urlBg={bg} colorBg="green">
         <p>This is the description</p>
       </Layout>
-      <Footer />
+    
     </div>
   );
 }
