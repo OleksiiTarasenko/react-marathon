@@ -4,17 +4,17 @@ import NavBar from "../Navbar/NavBar";
 
 /* import style from "./style.module.css"; */
 
-const MenuHeader = () => {
-  const [isActive, setMenu] = useState(false);
+const MenuHeader = ({bgActive}) => {
+  const [isOpen, setMenu] = useState(null);
 
   const handlerChangeMenu = () => {
-    setMenu(!isActive);
+    setMenu(prevState => !prevState);
   };
 
   return (
     <div>
-      <Menu state={isActive} />
-      <NavBar state={isActive} onChangeMenu={handlerChangeMenu} />
+      <Menu isOpen={isOpen} onChangeMenu={handlerChangeMenu} />
+      <NavBar isOpen={isOpen} bgActive ={bgActive} onChangeMenu={handlerChangeMenu} />
     </div>
   );
 };
