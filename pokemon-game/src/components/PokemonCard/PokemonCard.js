@@ -5,10 +5,11 @@ import cardBack from "../../assets/card-back-side.jpg";
 
 import style from "./style.module.css";
 
-const PokemonCard = ({ name, img, id, type, values, active, onCardFlip }) => {
+const PokemonCard = ({name, img, id, type, values, active, onCardFlip, objID }) => {
 const handlerClick = () => {
-  onCardFlip && onCardFlip(id)
+  onCardFlip && onCardFlip(id, active, objID)
 }
+
   return (
     <div  className={style.root} onClick={handlerClick} >
       <div    className={cn(style.pokemonCard, { [style.active]: active })}>
