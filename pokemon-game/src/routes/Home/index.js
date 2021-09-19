@@ -1,9 +1,7 @@
 import Header from "../../components/Header/Header";
 import Layout from "../../components/Layout/Layout";
 
-import PokemonCard from "../../components/PokemonCard/PokemonCard";
 
-import { POKEMONS } from "../../assets/pokemonSquad";
 import bg from "../../assets/bg1.jpg";
 
 import "../../index.css";
@@ -48,20 +46,7 @@ function HomePage({ onChangePage }) {
           the player's color instead.
         </p>
       </Layout>
-      <Layout title="Cards" colorBg="silver">
-        <div className="flex">
-          {POKEMONS.map((item) => (
-            <PokemonCard
-              key={item.id}
-              name={item.name}
-              img={item.img}
-              id={item.id}
-              type={item.type}
-              values={item.values}
-            />
-          ))}
-        </div>
-      </Layout>
+     
       <Layout title="This is the third title" urlBg={bg} colorBg="green">
         <p>This is the description</p>
       </Layout>

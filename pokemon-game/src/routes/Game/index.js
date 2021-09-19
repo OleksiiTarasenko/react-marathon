@@ -1,62 +1,103 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router";
+import cn from "classnames";
+import { database } from "../../services/firebase";
+
 import Layout from "../../components/Layout/Layout";
 import PokemonCard from "../../components/PokemonCard/PokemonCard";
 
-import { POKEMONS } from "../../assets/pokemonSquad";
-
 import style from "./style.module.css";
-
-/* const pokemonsMutable = POKEMONS.map((item) =>
-  Object.defineProperty(item, "active", {
-    value: true,
-    writable: true,
-    enumerable: true,
-    configurable: true,
-  })
-); */
 
 const GamePage = () => {
   const history = useHistory();
-
-  const [pokemons, setPokemons] = useState([...POKEMONS]);
+  useEffect(() => {
+    database.ref("pokemons").once(
+      "value",
+      (snapshot) => {
+        setPokemons(snapshot.val());
+      },
+      []
+    );
+  });
+  const [pokemons, setPokemons] = useState({});
 
   const handlerClickButton = () => {
     history.push("/");
   };
 
-  const handlerCardFlip = (id) => {
-    setPokemons(
-      pokemons.map((item) => {
-        if (item.id === id) {
-          item.active = !item.active;
+  const handlerCardFlip = (id, active, objID) => {
+    setPokemons((prevState) => {
+      return Object.entries(prevState).reduce((acc, item) => {
+        const pokemon = { ...item[1] };
+        if (pokemon.id === id) {
+          pokemon.active = true;
         }
 
-        return item;
-      })
-    );
+        acc[item[0]] = pokemon;
+
+        return acc;
+      }, {});
+    });
+    database.ref("pokemons/" + objID).set({
+      ...pokemons[objID],
+      active: !active,
+    });
+  };
+
+  const handlerAddPokemon = () => {
+    const data = {
+      abilities: ["keen-eye", "tangled-feet", "big-pecks"],
+      stats: {
+        hp: 63,
+        attack: 60,
+        defense: 55,
+        "special-attack": 50,
+        "special-defense": 50,
+        speed: 71,
+      },
+      type: "flying",
+      img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/17.png",
+      name: "pidgeotto",
+      base_experience: 122,
+      height: 11,
+      id: 170,
+      values: {
+        top: "A",
+        right: 2,
+        bottom: 7,
+        left: 5,
+      },
+    };
+    const newKey = database.ref().child("pokemons").push().key;
+    database.ref("pokemons/" + newKey).set(data);
   };
 
   return (
     <>
+      <Layout title="This is the game page!" colorBg="limegreen">
+        <div className={cn(style.flex, style.buttonSet)}>
+          <button onClick={handlerClickButton}> Return to Homepage </button>
+          <button onClick={handlerAddPokemon}> Add Pokemon </button>
+        </div>
+      </Layout>
       <div className={style.root}>
-        <h1 className={style.title}>This is the game page!</h1>
-        <button onClick={handlerClickButton}> Return to Homepage </button>
-
         <Layout title="Cards" colorBg="silver">
           <div className={style.flex}>
-            {pokemons.map((item) => (
-              <PokemonCard
-                key={item.id}
-                name={item.name}
-                img={item.img}
-                id={item.id}
-                type={item.type}
-                values={item.values}
-                active={item.active}
-                onCardFlip={handlerCardFlip}
-              />
-            ))}
+            {Object.entries(pokemons).map(
+              ([key, { name, id, img, type, values, active }]) => (
+                <PokemonCard
+                  key={id}
+                  objID={key}
+                  name={name}
+                  img={img}
+                  id={id}
+                  type={type}
+                  values={values}
+                  active={active}
+                  onCardFlip={handlerCardFlip}
+                />
+              )
+            )}
           </div>
         </Layout>
       </div>
