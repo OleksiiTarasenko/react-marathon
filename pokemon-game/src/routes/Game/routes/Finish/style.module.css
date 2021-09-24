@@ -1,0 +1,15 @@
+.finish {
+    background-color: blueviolet;
+    height: 100vh;
+}
+
+.title {
+    padding-top: 200px; 
+    font-size: 4rem;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-around;
+    height: 300px;
+}

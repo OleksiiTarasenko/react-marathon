@@ -9,7 +9,7 @@ import PokemonCard from "../../../../components/PokemonCard/PokemonCard";
 import style from "./style.module.css";
 import { PokemonContext } from "../../../../context/pokemonContext";
 
-const StartPage = () => {
+const StartPage = ({player2}) => {
   const firebase = useContext(FirebaseContext);
   const pokemonsContext = useContext(PokemonContext);
   const history = useHistory();
