@@ -23,9 +23,7 @@ const BoardPage = () => {
   const pokemonContext = useContext(PokemonContext)
   const { pokemons } = useContext(PokemonContext);
   const { pokemons2 } = useContext(PokemonContext);
- 
-  
-  
+   
  
 
   const [board, setBoard] = useState([]);

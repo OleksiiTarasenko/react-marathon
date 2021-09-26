@@ -17,7 +17,9 @@ const [pickedCard, setPickedCard] = useState([])
   const pokemons = pokemonsContext.pokemons;
   const player2 = pokemonsContext.pokemons2;
   const winner = pokemonsContext.winner;
- 
+  
+  const [isSelected, setSelected] = useState(null)
+
   const handlerEndGameClick = () => {
     if (pickedCard && winner) {
       firebase.addPokemon(pickedCard[0], async () => {
@@ -27,12 +29,13 @@ const [pickedCard, setPickedCard] = useState([])
     history.replace("/game");
   };
 
-  const handlerClick = (event) => {
+  const handlerClick = (event, id) => {
     const pickedCardName = event.target.children[0].innerText.split("\n")[5];
+    setSelected(pickedCardName)
+    
+  
 
-    for (const element of player2) {
-      element.selected = "false";
-    }
+    
  
     const picked = player2.filter(function (el) {
       return el.name === pickedCardName;
@@ -69,7 +72,7 @@ const [pickedCard, setPickedCard] = useState([])
           {Object.entries(player2).map(
             ([key, { name, id, img, type, values, selected }]) => (
               <div
-                className={cn(s.cardWrap, { [s.picked]:false })}
+                className={cn(s.cardWrap, { [s.picked]:isSelected === name })}
                 onClick={handlerClick}
               >
                 <PokemonCard
