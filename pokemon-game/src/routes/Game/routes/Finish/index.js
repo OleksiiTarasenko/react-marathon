@@ -64,7 +64,7 @@ const [pickedCard, setPickedCard] = useState([])
           )}
         </div>
         <div className={cn(s.buttonWrap)}>
-          <button onClick={handlerEndGameClick}> End Game</button>
+          <button onClick={handlerEndGameClick}  disabled={pickedCard.length<1 && winner}> End Game</button>
         </div>
         <div className={s.flex}>
           {Object.entries(player2).map(
