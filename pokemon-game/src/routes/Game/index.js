@@ -30,7 +30,7 @@ const GamePage = () => {
         possession: "red",
       }));
     });
-  }, [isWinner]);
+  }, []);
 
  const  onWin = (result) => {
    setWinner((prevState) => prevState = result)

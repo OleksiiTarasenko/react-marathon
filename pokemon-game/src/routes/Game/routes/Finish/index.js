@@ -32,10 +32,8 @@ const [pickedCard, setPickedCard] = useState([])
   const handlerClick = (event, id) => {
     const pickedCardName = event.target.children[0].innerText.split("\n")[5];
     setSelected(pickedCardName)
-    
+     
   
-
-    
  
     const picked = player2.filter(function (el) {
       return el.name === pickedCardName;
