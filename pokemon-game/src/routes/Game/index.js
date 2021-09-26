@@ -8,25 +8,33 @@ import StartPage from "./routes/Start";
 const GamePage = () => {
   const [selectedPokemons, setSelectedPokemons] = useState({});
   const [selectedPokemons2, setSelectedPokemons2] = useState({});
-const clearSelectedPokemons =() => setSelectedPokemons({})
+  const [isWinner, setWinner] = useState("false");
+ 
+  const clearSelectedPokemons = () => {
+    setSelectedPokemons({});
+    setSelectedPokemons([]);
+    setWinner(false)
+    
+  };
   const match = useRouteMatch();
 
-useEffect( async()=> {
-  const player2Response = await fetch(
-    "https://reactmarathon-api.netlify.app/api/create-player"
-  );
-  const player2Request = await player2Response.json();
-  
-  
-    
-  setSelectedPokemons2(() => {
-    return player2Request.data.map((item) => ({
-      ...item,
-      possession: "red",
-    }));
-  });
-}, []);
+  useEffect(async () => {
+    const player2Response = await fetch(
+      "https://reactmarathon-api.netlify.app/api/create-player"
+    );
+    const player2Request = await player2Response.json();
 
+    setSelectedPokemons2(() => {
+      return player2Request.data.map((item) => ({
+        ...item,
+        possession: "red",
+      }));
+    });
+  }, [isWinner]);
+
+ const  onWin = (result) => {
+   setWinner((prevState) => prevState = result)
+ }
 
   const handlerSelectedPokemons = (key, pokemon) => {
     setSelectedPokemons((prevState) => {
@@ -43,14 +51,16 @@ useEffect( async()=> {
     });
   };
 
-
   return (
     <PokemonContext.Provider
       value={{
         pokemons: selectedPokemons,
         pokemons2: selectedPokemons2,
+        winner: isWinner,
         onSelectedPokemons: handlerSelectedPokemons,
-        clear: clearSelectedPokemons
+        clear: clearSelectedPokemons,
+        onWin: onWin,
+        
       }}
     >
       <Switch>

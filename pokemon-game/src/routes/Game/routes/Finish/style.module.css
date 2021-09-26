@@ -1,15 +1,30 @@
-.finish {
-    background-color: blueviolet;
-    height: 100vh;
-}
-
-.title {
-    padding-top: 200px; 
-    font-size: 4rem;
+.root {
+  padding-top: 100px;
+  background-color: rgb(185, 156, 212);
+  height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .flex {
-    display: flex;
-    justify-content: space-around;
-    height: 300px;
+  display: flex;
+
+  height: 42vh;
+  margin: 15px 0;
+}
+
+.buttonWrap {
+  text-align: center;
+}
+
+.cardWrap { 
+    min-height: 100%;
+    min-width: 20%;
+    
+}
+
+.picked {
+  margin-top: -20px;
+  margin-bottom: 20px;
 }
