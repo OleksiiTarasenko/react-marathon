@@ -28,7 +28,7 @@ const MenuHeader = ({ bgActive }) => {
         returnSecureToken: true,
       }) 
     }
-    const response = await fetch(' https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAViB2abs2aUyOch7caO2Uc7aZ0hCal6vo', requestOptions).then(res=>res.json())
+    const response = await fetch(' https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[key]', requestOptions).then(res=>res.json())
     console.log('responce%%%:  ', response)
     if (response.hasOwnProperty('error')) {
       NotificationManager.error(response.error.message, 'Error!')
@@ -49,7 +49,7 @@ const MenuHeader = ({ bgActive }) => {
         returnSecureToken: true,
       }) 
     }
-    const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key==AIzaSyAViB2abs2aUyOch7caO2Uc7aZ0hCal6vo', requestOptions).then(res=>res.json())
+    const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key==[key]', requestOptions).then(res=>res.json())
     console.log('responce%%%:  ', response)
     if (response.hasOwnProperty('error')) {
       NotificationManager.error(response.error.message, 'Error!')
