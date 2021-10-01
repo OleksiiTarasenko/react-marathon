@@ -1,9 +1,4 @@
-import {
-  Route,
-  Switch,
-  Redirect,
-  useLocation,
-} from "react-router-dom";
+import { Route, Switch, Redirect, useLocation } from "react-router-dom";
 
 import HomePage from "./routes/Home";
 import GamePage from "./routes/Game";
@@ -12,13 +7,14 @@ import ContactPage from "./routes/Contact";
 import NotFoundPage from "./routes/NotFound";
 import MenuHeader from "./components/MenuHeader/MenuHeader";
 import Footer from "./components/Footer/Footer";
+import PrivateRoute from "./components/PrivateRoute";
 import { FirebaseContext } from "./context/Firebase";
 import cn from "classnames";
-
+import { NotificationContainer } from "react-notifications";
 import style from "./style.modules.css";
-import Firebase from "./services/firebase";
+/* import Firebase from "./services/firebase"; */
 import FirebaseClass from "./services/firebase";
-
+import "react-notifications/lib/notifications.css";
 function App() {
   const location = useLocation();
   const isPadding =
@@ -35,9 +31,9 @@ function App() {
               <Switch>
                 <Route path="/" exact component={HomePage} />
                 <Route path="/home" component={HomePage} />
-                <Route path="/game" component={GamePage} />
-                <Route path="/about" component={AboutPage} />
-                <Route path="/contact" component={ContactPage} />
+                <PrivateRoute path="/game" component={GamePage} />
+                <PrivateRoute path="/about" component={AboutPage} />
+                <PrivateRoute path="/contact" component={ContactPage} />
                 <Route render={() => <Redirect to="/404" />} />
               </Switch>
             </div>
@@ -45,6 +41,7 @@ function App() {
           </>
         </Route>
       </Switch>
+      <NotificationContainer />
     </FirebaseContext.Provider>
   );
 }
