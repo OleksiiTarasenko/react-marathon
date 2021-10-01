@@ -17,6 +17,7 @@ import cn from "classnames";
 
 import style from "./style.modules.css";
 import Firebase from "./services/firebase";
+import FirebaseClass from "./services/firebase";
 
 function App() {
   const location = useLocation();
@@ -24,7 +25,7 @@ function App() {
     location.pathname === "/" || location.pathname === "/game/board";
 
   return (
-    <FirebaseContext.Provider value={new Firebase()}>
+    <FirebaseContext.Provider value={FirebaseClass}>
       <Switch>
         <Route path="/404" component={NotFoundPage} />
         <Route>
