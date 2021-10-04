@@ -10,21 +10,28 @@ import style from "./style.module.css";
 import { PokemonContext } from "../../../../context/pokemonContext";
 import { useDispatch, useSelector } from "react-redux";
 import {
- /*  getPokemons, */
+  /*  getPokemons, */
   getPokemonsAsync,
   selectPokemonsData,
+  selectPokemon,
+  selectSelectedData,
+  deletePokemon,
+ 
   /* selectPokemonsLoading, */
 } from "../../../../store/pokemons";
 
 const StartPage = () => {
- /*  const firebase = useContext(FirebaseContext); */
+  /*  const firebase = useContext(FirebaseContext); */
   const pokemonsContext = useContext(PokemonContext);
-/*   const isLoading = useSelector(selectPokemonsLoading); */
+  /*   const isLoading = useSelector(selectPokemonsLoading); */
   const pokemonsRedux = useSelector(selectPokemonsData);
+  const pokemonsSelectedRedux = useSelector(selectSelectedData);
   const dispatch = useDispatch();
 
-  /* console.log("###: PokemonsREDUX", pokemonsRedux); */
+ /*  console.log("###: PokemonsREDUX", pokemonsRedux); */
+  console.log("###: SelectedREDUX", pokemonsSelectedRedux);
   const history = useHistory();
+
   const [pokemons, setPokemons] = useState({});
 
   useEffect(() => {
@@ -42,6 +49,22 @@ const StartPage = () => {
 
   const handlerChangeSelected = (key) => {
     const pokemon = { ...pokemons[key] };
+    console.log("%%%% selected", pokemon);
+    console.log("###: SelectedREDUX", pokemonsSelectedRedux);
+   /*  const arr = [...pokemonsSelectedRedux]
+    const index =arr.indexOf(pokemon)
+    console.log('key: ', pokemon.id, 'index:', index) */
+    dispatch(selectPokemon(pokemon))
+    /* if (pokemon.id in pokemonsSelectedRedux) {
+      
+      dispatch(deletePokemon(index)) 
+    } else {
+      dispatch(selectPokemon(pokemon))
+    }
+    ; */
+
+   
+
     pokemonsContext.onSelectedPokemons(key, pokemon);
 
     setPokemons((prevState) => ({

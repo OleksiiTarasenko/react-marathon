@@ -1,1 +1,12 @@
+.switch {
+  margin-top: -50px;
+  background-color: transparent;
+  color: #3f00b4;
+  border: none;
+  float: right;
+}
 
+.switch:hover {
+  color: #b42976;
+  border: none;
+}
