@@ -9,12 +9,11 @@ const GamePage = () => {
   const [selectedPokemons, setSelectedPokemons] = useState({});
   const [selectedPokemons2, setSelectedPokemons2] = useState({});
   const [isWinner, setWinner] = useState("false");
- 
+
   const clearSelectedPokemons = () => {
     setSelectedPokemons({});
     setSelectedPokemons([]);
-    setWinner(false)
-    
+    setWinner(false);
   };
   const match = useRouteMatch();
 
@@ -32,9 +31,9 @@ const GamePage = () => {
     });
   }, []);
 
- const  onWin = (result) => {
-   setWinner((prevState) => prevState = result)
- }
+  const onWin = (result) => {
+    setWinner((prevState) => (prevState = result));
+  };
 
   const handlerSelectedPokemons = (key, pokemon) => {
     setSelectedPokemons((prevState) => {
@@ -60,7 +59,6 @@ const GamePage = () => {
         onSelectedPokemons: handlerSelectedPokemons,
         clear: clearSelectedPokemons,
         onWin: onWin,
-        
       }}
     >
       <Switch>

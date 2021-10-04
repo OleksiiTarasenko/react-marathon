@@ -1,12 +1,19 @@
-import { useState } from "react";
-import s from "./style.module.css";
-const LoginForm = ({ onSubmit }) => {
+import { useState, useEffect } from "react";
+
+import Input from "../Input";
+const LoginForm = ({ onSubmit, isResetField, isLogIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  useEffect(() => {
+    setEmail("");
+    setPassword("");
+  }, [isResetField]);
+
   const handlerSubmit = (e) => {
     e.preventDefault();
-    onSubmit && onSubmit({ email, password });
+    onSubmit &&
+      onSubmit({ type: isLogIn ? "login" : "signup", email, password });
 
     setPassword("");
     setEmail("");
@@ -14,20 +21,21 @@ const LoginForm = ({ onSubmit }) => {
   return (
     <form onSubmit={handlerSubmit}>
       <div>
-        <input
+        <Input
+          label="Email"
           value={email}
-          type="text"
           name="email"
           onChange={(e) => setEmail(e.target.value)}
         />
-        <input
+        <Input
+          label="Password"
           value={password}
           type="password"
           name="password"
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <button>Login</button>
+      <button>{isLogIn ? "Login" : "SignUp"}</button>
     </form>
   );
 };

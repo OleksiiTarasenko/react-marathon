@@ -29,7 +29,7 @@ const Modal = ({ isOpen, title, children, onCloseModal }) => {
             {title}
             <span className={s.btnClose} onClick={handlerCloseModal}></span>
           </div>
-          <div classNameName={s.content}>{children}</div>
+          <div className={s.content}>{children}</div>
         </div>
       </div>
     </div>
