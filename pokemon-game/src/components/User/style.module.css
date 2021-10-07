@@ -1,0 +1,15 @@
+.root {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 100px;
+}
+
+h1 {
+    font-size: 4rem;
+    text-transform: uppercase;
+}
+p {
+   
+    font-size: 3rem;
+}
